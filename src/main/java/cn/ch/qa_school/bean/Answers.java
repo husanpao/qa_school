@@ -1,11 +1,14 @@
 package cn.ch.qa_school.bean;
 
+import com.github.drinkjava2.jdialects.annotation.jdia.PKey;
 import com.github.drinkjava2.jdialects.annotation.jpa.Column;
 import com.github.drinkjava2.jdialects.annotation.jpa.Id;
+import com.github.drinkjava2.jdialects.annotation.jpa.Table;
 import com.github.drinkjava2.jsqlbox.ActiveRecord;
 
 import java.sql.Timestamp;
 
+@Table(name = "answers")
 public class Answers extends ActiveRecord<Answers> {
     public static final String ID = "id";
 
@@ -20,12 +23,13 @@ public class Answers extends ActiveRecord<Answers> {
     public static final String CREATETIME = "createtime";
 
     @Id
+    @PKey
     private Integer id;
 
     /**
      * 问题id
      */
-    private Integer qid;
+    private String qid;
     /**
      * 答案
      */
@@ -39,6 +43,7 @@ public class Answers extends ActiveRecord<Answers> {
      */
     @Column(name = "md5", length = 200)
     private String md5;
+    @Column(name = "createtime", insertable = false, updatable = false)
     private Timestamp createtime;
 
     public Integer getId() {
@@ -50,11 +55,11 @@ public class Answers extends ActiveRecord<Answers> {
         return this;
     }
 
-    public Integer getQid() {
+    public String getQid() {
         return qid;
     }
 
-    public Answers setQid(Integer qid) {
+    public Answers setQid(String qid) {
         this.qid = qid;
         return this;
     }

@@ -1,11 +1,15 @@
 package cn.ch.qa_school.bean;
 
+import com.github.drinkjava2.jdialects.annotation.jdia.PKey;
 import com.github.drinkjava2.jdialects.annotation.jpa.Column;
 import com.github.drinkjava2.jdialects.annotation.jpa.Id;
+import com.github.drinkjava2.jdialects.annotation.jpa.Table;
 import com.github.drinkjava2.jsqlbox.ActiveRecord;
+import org.springframework.context.annotation.Primary;
 
 import java.sql.Timestamp;
 
+@Table(name = "questions")
 public class Questions extends ActiveRecord<Questions> {
     public static final String ID = "id";
 
@@ -22,7 +26,7 @@ public class Questions extends ActiveRecord<Questions> {
     public static final String STATUS = "status";
 
     @Id
-    private Integer id;
+    private String id;
 
     /**
      * 问题
@@ -37,6 +41,7 @@ public class Questions extends ActiveRecord<Questions> {
      */
     @Column(name = "md5", length = 200)
     private String md5;
+    @Column(name = "createtime", updatable = false, insertable = false)
     private Timestamp createtime;
     /**
      * 题目来源0 系统 1其他
@@ -47,11 +52,11 @@ public class Questions extends ActiveRecord<Questions> {
      */
     private Integer status;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public Questions setId(Integer id) {
+    public Questions setId(String id) {
         this.id = id;
         return this;
     }

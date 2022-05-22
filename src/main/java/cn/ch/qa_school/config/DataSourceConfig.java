@@ -28,7 +28,7 @@ public class DataSourceConfig {
     public DbContext mainDbContext() {
         DbContext ctx = new DbContext(getDataSource());
         DbContext.setGlobalDbContext(ctx);
-        ctx.setAllowShowSQL(true);
+        ctx.setAllowShowSQL(false);
         return ctx;
     }
 }

@@ -1,13 +1,18 @@
 package cn.ch.qa_school.controller;
 
+import cn.ch.qa_school.bean.QuestionStruct;
 import cn.ch.qa_school.service.QuestionService;
 import cn.ch.qa_school.sys.controller.BaseController;
 import cn.ch.qa_school.sys.exeception.QuestionException;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class QuestionController extends BaseController {
@@ -32,6 +37,13 @@ public class QuestionController extends BaseController {
         } else {
             throw new QuestionException("The body needs a json eg:[{q:'today is ?',a:'Monday'}]");
         }
+    }
+
+    @PostMapping("/auto")
+    @CrossOrigin(originPatterns = "*")
+    public Result auto(@RequestBody List<QuestionStruct> body) {
+        service.auto(body);
+        return success();
     }
 
 }
